@@ -1,5 +1,15 @@
 # AL Property — personal agent demo
 
+## GitHub Pages deployment
+
+In the repository's **Settings → Pages**, select **GitHub Actions** as the source.
+The **Deploy website to GitHub Pages** workflow builds and publishes `dist/` after
+every push to `main`. It can also be started from **Actions → Deploy website to
+GitHub Pages → Run workflow**. No personal access token or additional secret is
+needed; deployment uses the workflow's built-in GitHub token.
+
+The expected public address is https://fnfmobilitymy-boop.github.io/property/.
+
 A bilingual English / Simplified Chinese property advisor landing page inspired by the supplied reference video: dark surfaces, oversized typography, violet lighting, a layered portrait, and a scroll-scrubbed opening sequence.
 
 ## Run
