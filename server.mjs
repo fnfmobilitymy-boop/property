@@ -1,0 +1,5 @@
+import http from 'node:http';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+const root=process.cwd(); const port=Number(process.env.PORT||5173);
+http.createServer(async(req,res)=>{try{const url=new URL(req.url,'http://localhost');let file=decodeURIComponent(url.pathname); if(file==='/')file='/index.html'; if(!['/index.html','/style.css','/app.js','/new-launches.html','/resale-homes.html','/listings.js','/listings.css','/home-showcase.css'].includes(file)&&!file.startsWith('/public/'))throw Error(); const target=path.resolve(root,'.'+file);if(!target.startsWith(root+path.sep)||(file.startsWith('/public/')&&!target.startsWith(path.join(root,'public')+path.sep)))throw Error();const data=await readFile(target);const type={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.otf':'font/otf','.ttf':'font/ttf'}[path.extname(target)]||'application/octet-stream';res.writeHead(200,{'Content-Type':type});res.end(data);}catch{res.writeHead(404);res.end('Not found');}}).listen(port,'0.0.0.0',()=>console.log(`Property site listening on ${port}`));
